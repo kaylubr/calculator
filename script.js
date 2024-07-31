@@ -45,15 +45,24 @@ calcBtns.addEventListener('click', (e) => {
     case '3':
       clicked('3');
       break;
+    case '0':
+      clicked('0');
+      break;
     case 'plus':
       operator = '+';
       handleOperation(operator);
       break;
     case 'minus':
+      operator = '-';
+      handleOperation(operator);
       break;
     case 'multiply':
+      operator = 'x';
+      handleOperation(operator);
       break;
     case 'divide':
+      operator = '/';
+      handleOperation(operator);
       break;
     case 'equal':
       if (firstNumber !== null || secondNumber !== null) {
@@ -92,7 +101,7 @@ function operate(firstNumber, secondNumber, operator) {
     case '-':
       displayedValue.textContent = subtract(firstNumber, secondNumber);
       break;
-    case '*':
+    case 'x':
       displayedValue.textContent = multiply(firstNumber, secondNumber);
       break;
     case '/':
@@ -144,7 +153,7 @@ function deleteInput() {
   if (operatorClicked === true) {
     return;
   }
-  
+
   let str = displayedValue.textContent.split("");
   str.pop();
   displayedValue.textContent = str.join("");
