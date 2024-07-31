@@ -66,13 +66,7 @@ calcBtns.addEventListener('click', (e) => {
       handleOperation(operator);
       break;
     case 'equal':
-      if (firstNumber !== null || secondNumber !== null) {
-        secondNumber = parseInt(displayedValue.textContent);
-        operate(firstNumber, secondNumber, operator);
-        calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
-      }
-
-      equalClicked = true;
+      equal();
       break;
   }
   playType();
@@ -172,7 +166,10 @@ function deleteInput() {
   }
 
   if (displayedValue.textContent.length === 1) {
-    displayContainer.removeChild(calcHistory);
+    if (calcHistoryExists === true)  {
+      displayContainer.removeChild(calcHistory);
+      calcHistoryExists = false;
+    }
     displayedValue.textContent = '0';
     calcHistoryExists = false;
     return;
@@ -189,9 +186,21 @@ function deleteInput() {
 }
 
 function handleOperation(operator) {
+  if (firstNumber !== null && secondNumber === null) {
+    equal();
+  }
   operatorClicked = true;
   firstNumber = parseInt(displayedValue.textContent);
   calcHistory.textContent = `${firstNumber} ${operator}`;
   calcHistoryExists = true;
   displayContainer.append(calcHistory);
+}
+
+function equal() {
+  if (firstNumber !== null || secondNumber !== null) {
+    secondNumber = parseInt(displayedValue.textContent);
+    operate(firstNumber, secondNumber, operator);
+    calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
+    equalClicked = true;
+  }
 }
