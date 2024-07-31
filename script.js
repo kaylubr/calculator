@@ -15,64 +15,163 @@ calcBtns.addEventListener('click', (e) => {
   switch(e.target.id) {
     case 'clear':
       clearData();
+      playType();
       break;
     case 'delete':
       deleteInput();
+      playType();
       break;
     case '7':
       clicked('7');
+      playType();
       break;
     case '8':
       clicked('8');
+      playType();
       break;
     case '9':
       clicked('9');
+      playType();
       break;
     case '4':
       clicked('4');
+      playType();
       break;
     case '5':
       clicked('5');
+      playType();
       break;
     case '6':
       clicked('6');
+      playType();
       break;
     case '1':
       clicked('1');
+      playType();
       break;
     case '2':
       clicked('2');
+      playType();
       break;
     case '3':
       clicked('3');
+      playType();
       break;
     case '0':
       clicked('0');
+      playType();
       break;
     case 'decimal':
       clicked('.');
+      playType();
       break;
     case 'plus':
       operator = '+';
       handleOperation(operator);
+      playType();
       break;
     case 'minus':
       operator = '-';
       handleOperation(operator);
+      playType();
       break;
     case 'multiply':
       operator = 'x';
       handleOperation(operator);
+      playType();
       break;
     case 'divide':
       operator = '/';
       handleOperation(operator);
+      playType();
       break;
     case 'equal':
       equal();
+      playType();
       break;
   }
-  playType();
+});
+
+document.addEventListener('keydown', (e) => {
+  isDisplayAnError();
+  switch(e.key) {
+    case 'Escape':
+      clearData();
+      playType();
+      break;
+    case 'Backspace':
+      deleteInput();
+      playType();
+      break;
+    case '7':
+      clicked('7');
+      playType();
+      break;
+    case '8':
+      clicked('8');
+      playType();
+      break;
+    case '9':
+      clicked('9');
+      playType();
+      break;
+    case '4':
+      clicked('4');
+      playType();
+      break;
+    case '5':
+      clicked('5');
+      playType();
+      break;
+    case '6':
+      clicked('6');
+      playType();
+      break;
+    case '1':
+      clicked('1');
+      playType();
+      break;
+    case '2':
+      clicked('2');
+      playType();
+      break;
+    case '3':
+      clicked('3');
+      playType();
+      break;
+    case '0':
+      clicked('0');
+      playType();
+      break;
+    case '.':
+      clicked('.');
+      playType();
+      break;
+    case '+':
+      operator = '+';
+      playType();
+      handleOperation(operator);
+      break;
+    case '-':
+      operator = '-';
+      handleOperation(operator);
+      playType();
+      break;
+    case '*':
+      operator = 'x';
+      handleOperation(operator);
+      playType();
+      break;
+    case '/':
+      operator = '/';
+      handleOperation(operator);
+      playType();
+      break;
+    case 'Enter':
+      equal();
+      playType();
+      break;
+  }
 });
 
 function add(firstNumber, secondNumber) {
@@ -145,7 +244,6 @@ function clearData() {
         return;
       }
 
-  console.log(calcHistory);
   firstNumber = 0;
   secondNumber = 0;
   displayedValue.textContent = '0';
