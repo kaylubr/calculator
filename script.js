@@ -1,7 +1,6 @@
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
-let decimalClicked = false;
 let operatorClicked = false;
 const displayContainer = document.querySelector('.left-section');
 const displayedValue = document.querySelector('#displayed-value');
@@ -144,8 +143,12 @@ function clearData() {
 
 function clicked(input) {
   if (input === '.'){
-    decimalClicked = true;
-    console.log(decimalClicked);
+    let displayChecker = Array.from(displayedValue.textContent);
+
+    if (displayChecker.includes('.')) {
+      return;
+    }
+
     displayedValue.textContent += input;
     return;
   }
