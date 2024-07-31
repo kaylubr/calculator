@@ -209,7 +209,7 @@ function divide(firstNumber, secondNumber) {
 function operate(firstNumber, secondNumber, operator) {
   switch(operator) {
     case '+':
-      displayedValue.textContent = add(firstNumber, secondNumber);
+      displayedValue.textContent = add(firstNumber, secondNumber); 
       break;
     case '-':
       displayedValue.textContent = subtract(firstNumber, secondNumber);
@@ -342,6 +342,10 @@ function equal() {
     }
     
     operate(firstNumber, secondNumber, operator);
+    if (displayedValue.textContent.length > 14) {
+      displayedValue.style.fontSize = "22px";
+    }
+    
     calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
     equalClicked = true;
   }
