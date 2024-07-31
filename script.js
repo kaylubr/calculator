@@ -8,6 +8,7 @@ const displayedValue = document.querySelector('#displayed-value');
 const calcBtns = document.querySelector('.operation-buttons');
 const calcHistory = document.createElement('div');
 calcHistory.setAttribute('id', 'calc-history');
+let calcHistoryExists = false;
 
 calcBtns.addEventListener('click', (e) => {
   e.preventDefault();
@@ -122,11 +123,23 @@ function playType() {
 }
 
 function clearData() {
+  if (firstNumber == 0 && 
+      secondNumber == 0 && 
+      displayedValue.textContent === '0' &&
+      operator === null) {
+        return;
+      }
+
+  console.log(calcHistory);
   firstNumber = 0;
   secondNumber = 0;
   displayedValue.textContent = '0';
   operator = null;
-  displayContainer.removeChild(calcHistory);
+
+  if (calcHistoryExists === true)  {
+    displayContainer.removeChild(calcHistory);
+    calcHistoryExists = false;
+  }
 }
 
 function clicked(input) {
@@ -154,6 +167,10 @@ function deleteInput() {
     return;
   }
 
+  if (displayedValue.textContent === '0') {
+    return;
+  }
+
   let str = displayedValue.textContent.split("");
   str.pop();
   displayedValue.textContent = str.join("");
@@ -163,5 +180,6 @@ function handleOperation(operator) {
   operatorClicked = true;
   firstNumber = parseInt(displayedValue.textContent);
   calcHistory.textContent = `${firstNumber} ${operator}`;
+  calcHistoryExists = true;
   displayContainer.append(calcHistory);
 }
