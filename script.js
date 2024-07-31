@@ -1,7 +1,7 @@
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
-let timesClicked = 0;
+let decimalClicked = false;
 let operatorClicked = false;
 const displayContainer = document.querySelector('.left-section');
 const displayedValue = document.querySelector('#displayed-value');
@@ -49,6 +49,9 @@ calcBtns.addEventListener('click', (e) => {
       break;
     case '0':
       clicked('0');
+      break;
+    case 'decimal':
+      clicked('.');
       break;
     case 'plus':
       operator = '+';
@@ -140,6 +143,13 @@ function clearData() {
 }
 
 function clicked(input) {
+  if (input === '.'){
+    decimalClicked = true;
+    console.log(decimalClicked);
+    displayedValue.textContent += input;
+    return;
+  }
+
   displayedValue.style.fontSize = '38px';
   if (displayedValue.textContent === '0') {
     displayedValue.textContent = input;
@@ -190,8 +200,16 @@ function handleOperation(operator) {
   if (firstNumber !== null && secondNumber === null) {
     equal();
   }
+
   operatorClicked = true;
-  firstNumber = parseInt(displayedValue.textContent);
+
+  if (containDecimal(displayedValue.textContent)) {
+    firstNumber = parseFloat(displayedValue.textContent);
+  } 
+  else {
+    firstNumber = parseInt(displayedValue.textContent);
+  }
+  
   calcHistory.textContent = `${firstNumber} ${operator}`;
   calcHistoryExists = true;
   displayContainer.append(calcHistory);
@@ -199,7 +217,13 @@ function handleOperation(operator) {
 
 function equal() {
   if (firstNumber !== null || secondNumber !== null) {
-    secondNumber = parseInt(displayedValue.textContent);
+    if (containDecimal(displayedValue.textContent)) {
+      secondNumber = parseFloat(displayedValue.textContent);
+    } 
+    else {
+      secondNumber = parseInt(displayedValue.textContent);
+    }
+    
     operate(firstNumber, secondNumber, operator);
     calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
     equalClicked = true;
@@ -210,4 +234,13 @@ function isDisplayAnError() {
   if (displayedValue.textContent === 'Cannot be divided to zero!') {
     clearData();
   }
+}
+
+function containDecimal(input) {
+  let checker = Array.from(input);
+  if (checker.includes('.')) {
+    return true;
+  } 
+
+  return false;
 }
