@@ -12,6 +12,7 @@ let calcHistoryExists = false;
 
 calcBtns.addEventListener('click', (e) => {
   e.preventDefault();
+  isDisplayAnError();
   switch(e.target.id) {
     case 'clear':
       clearData();
@@ -101,7 +102,7 @@ function operate(firstNumber, secondNumber, operator) {
       break;
     case '/':
       if (secondNumber == 0) {
-        displayedValue.textContent = "Cannot be divided to zero!"
+        displayedValue.textContent = "Cannot be divided to zero!";
         displayedValue.style.fontSize = '25px';
         break;
       }
@@ -202,5 +203,11 @@ function equal() {
     operate(firstNumber, secondNumber, operator);
     calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
     equalClicked = true;
+  }
+}
+
+function isDisplayAnError() {
+  if (displayedValue.textContent === 'Cannot be divided to zero!') {
+    clearData();
   }
 }
