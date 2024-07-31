@@ -3,46 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Calculator</title>
 </head>
 <body>
 
   <main>
     <div class="display-container">
-      <span>0</span>
+      <span id="displayValue">0</span>
     </div>
-    
+
     <div class="operation-buttons">
       <div class="delete-row">
-        <div class="clear"><a href=""><button>Clear</button></a></div>
-        <div class="delete"><a href=""><button>Delete</button></a></div>
+        <div><button id="clear">Clear</button></div>
+        <div><button id="delete">Delete</button></div>
       </div>
-      
+
       <div class="first-row">
-        <div><a href="#"><button>7</button></a></div>
-        <div><a href="#"><button>8</button></a></div>
-        <div><a href="#"><button>9</button></a></div>
-        <div><a href="#"><button>÷</button></a></div>
+        <div><button class="op-button">7</button></div>
+        <div><button class="op-button">8</button></div>
+        <div><button class="op-button">9</button></div>
+        <div><button class="op-button">÷</button></div>
       </div>
 
       <div class="second-row">
-        <div><a href="#"><button>4</button></a></div>
-        <div><a href="#"><button>5</button></a></div>
-        <div><a href="#"><button>6</button></a></div>
-        <div><a href="#"><button>x</button></a></div>
+        <div><button class="op-button">4</button></div>
+        <div><button class="op-button">5</button></div>
+        <div><button class="op-button">6</button></div>
+        <div><button class="op-button">x</button></div>
       </div>
 
       <div class="third-row">
-        <div><a href="#"><button>1</button></a></div>
-        <div><a href="#"><button>2</button></a></div>
-        <div><a href="#"><button>3</button></a></div>
-        <div><a href="#"><button>-</button></a></div>
+        <div><button class="op-button">1</button></div>
+        <div><button class="op-button">2</button></div>
+        <div><button class="op-button">3</button></div>
+        <div><button class="op-button">-</button></div>
       </div>
 
       <div class="fourth-row">
-        <div><a href="#"><button>.</button></a></div>
-        <div><a href="#"><button>0</button></a></div>
-        <div><a href="#"><button>=</button></a></div>
+        <div><button class="op-button">.</button></div>
+        <div><button class="op-button">0</button></div>
+        <div><button class="op-button">=</button></div>
+        <div><button class="op-button">+</button></div>
       </div>
     </div>
   </main>

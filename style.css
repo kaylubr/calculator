@@ -1,0 +1,56 @@
+body {
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* The main container/calculator */
+main {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+  padding: 20px 0px;
+  gap: 1rem;
+}
+
+/* Two containers inside main*/
+
+/* Display container style */
+.display-container {
+  display: flex;
+  width: 363px;
+  height: 90px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border: 2px solid black;
+}
+
+.operation-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.operation-buttons > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+}
+
+/* Styling the row for deleting */
+#clear, 
+#delete {
+  width: 120px;  
+  height: 50px;
+}
+
+/* For the buttons for arithmetic operations */
+.op-button {
+  width: 90px;
+  height: 60px;
+}
