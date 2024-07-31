@@ -23,5 +23,20 @@ function operate(firstNumber, secondNumber, operator) {
   switch(operator) {
     case '+':
       displayedValue = add(firstNumber, secondNumber);
+      break;
+    case '-':
+      displayedValue = subtract(firstNumber, secondNumber);
+      break;
+    case '*':
+      displayedValue = multiply(firstNumber, secondNumber);
+      break;
+    case '/':
+      if (secondNumber == 0) {
+        displayedValue = "Cannot be divided to zero!"
+        break;
+      }
+
+      displayedValue = divide(firstNumber, secondNumber);
+      break;
   }
 }
