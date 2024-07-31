@@ -229,12 +229,6 @@ function operate(firstNumber, secondNumber, operator) {
   }
 }
 
-//Keyboard sound effect
-function playType() {
-  let audio = document.getElementById('audio');
-  audio.play();
-}
-
 function clearData() {
   displayedValue.style.fontSize = '38px';
   if (firstNumber == 0 && 
@@ -364,4 +358,10 @@ function containDecimal(input) {
   } 
 
   return false;
+}
+
+//Keyboard sound effect
+function playType() {
+  let audio = document.getElementById('audio');
+  audio.play();
 }
