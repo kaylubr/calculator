@@ -76,19 +76,35 @@ calcBtns.addEventListener('click', (e) => {
 });
 
 function add(firstNumber, secondNumber) {
-  return firstNumber + secondNumber;
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber + secondNumber).toFixed(1);
+  } else {
+    return firstNumber + secondNumber;
+  }
 }
 
 function subtract(firstNumber, secondNumber) {
-  return firstNumber - secondNumber;
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber - secondNumber).toFixed(1);
+  } else {
+    return firstNumber - secondNumber;
+  }
 }
 
 function multiply(firstNumber, secondNumber) {
-  return firstNumber * secondNumber;
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber * secondNumber).toFixed(1);
+  } else {
+    return firstNumber * secondNumber;
+  }
 }
 
 function divide(firstNumber, secondNumber) {
-  return firstNumber / secondNumber;
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber / secondNumber).toFixed(1);
+  } else {
+    return firstNumber / secondNumber;
+  }
 }
 
 function operate(firstNumber, secondNumber, operator) {
@@ -240,7 +256,7 @@ function isDisplayAnError() {
 }
 
 function containDecimal(input) {
-  let checker = Array.from(input);
+  let checker = Array.from(input.toString());
   if (checker.includes('.')) {
     return true;
   } 
