@@ -108,6 +108,7 @@ function operate(firstNumber, secondNumber, operator) {
     case '/':
       if (secondNumber == 0) {
         displayedValue.textContent = "Cannot be divided to zero!"
+        displayedValue.style.fontSize = '25px';
         break;
       }
 
@@ -123,6 +124,7 @@ function playType() {
 }
 
 function clearData() {
+  displayedValue.style.fontSize = '38px';
   if (firstNumber == 0 && 
       secondNumber == 0 && 
       displayedValue.textContent === '0' &&
@@ -143,6 +145,7 @@ function clearData() {
 }
 
 function clicked(input) {
+  displayedValue.style.fontSize = '38px';
   if (displayedValue.textContent === '0') {
     displayedValue.textContent = input;
     return;
@@ -163,6 +166,7 @@ function clicked(input) {
 }
 
 function deleteInput() {
+  displayedValue.style.fontSize = '38px';
   if (operatorClicked === true) {
     return;
   }
@@ -171,6 +175,11 @@ function deleteInput() {
     displayContainer.removeChild(calcHistory);
     displayedValue.textContent = '0';
     calcHistoryExists = false;
+    return;
+  }
+
+  if (displayedValue.textContent === 'Cannot be divided to zero!') {
+    clearData();
     return;
   }
 
