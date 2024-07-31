@@ -7,16 +7,16 @@
   <title>Calculator</title>
 </head>
 <body>
-
+  <audio id="audio" src="./sounds/keyboard-sound-type.mp3"></audio>
   <main>
     <div class="display-container">
-      <span id="displayValue">0</span>
+      <span id="displayed-value">0</span>
     </div>
 
     <div class="operation-buttons">
       <div class="delete-row">
-        <div><button id="clear">Clear</button></div>
-        <div><button id="delete">Delete</button></div>
+        <div><button id="clear" onclick="playType()">AC</button></div>
+        <div><button id="delete" onclick="playType()">⌦</button></div>
       </div>
 
       <div class="first-row">
@@ -50,4 +50,5 @@
   </main>
 
 </body>
+<script src="script.js"></script>
 </html>
