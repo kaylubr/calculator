@@ -167,7 +167,10 @@ function deleteInput() {
     return;
   }
 
-  if (displayedValue.textContent === '0') {
+  if (displayedValue.textContent.length === 1) {
+    displayContainer.removeChild(calcHistory);
+    displayedValue.textContent = '0';
+    calcHistoryExists = false;
     return;
   }
 
