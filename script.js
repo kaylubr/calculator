@@ -40,3 +40,8 @@ function operate(firstNumber, secondNumber, operator) {
       break;
   }
 }
+
+function playType() {
+  let audio = document.getElementById('audio');
+  audio.play();
+}
