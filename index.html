@@ -10,41 +10,43 @@
   <audio id="audio" src="./sounds/keyboard-sound-type.mp3"></audio>
   <main>
     <div class="display-container">
-      <span id="displayed-value">0</span>
+      <div class="left-section">
+        <div id="displayed-value">0</div>
+      </div>
     </div>
 
     <div class="operation-buttons">
       <div class="delete-row">
-        <div><button id="clear" onclick="playType()">AC</button></div>
-        <div><button id="delete" onclick="playType()">⌦</button></div>
+        <div><button id="clear" class="op-button">AC</button></div>
+        <div><button id="delete" class="op-button">⌦</button></div>
       </div>
 
       <div class="first-row">
-        <div><button class="op-button">7</button></div>
-        <div><button class="op-button">8</button></div>
-        <div><button class="op-button">9</button></div>
-        <div><button class="op-button">÷</button></div>
+        <div><button id="7" class="op-button">7</button></div>
+        <div><button id="8" class="op-button">8</button></div>
+        <div><button id="9" class="op-button">9</button></div>
+        <div><button id="divide" class="op-button">÷</button></div>
       </div>
 
       <div class="second-row">
-        <div><button class="op-button">4</button></div>
-        <div><button class="op-button">5</button></div>
-        <div><button class="op-button">6</button></div>
-        <div><button class="op-button">x</button></div>
+        <div><button id="4" class="op-button">4</button></div>
+        <div><button id="5" class="op-button">5</button></div>
+        <div><button id="6" class="op-button">6</button></div>
+        <div><button id="multiply" class="op-button">x</button></div>
       </div>
 
       <div class="third-row">
-        <div><button class="op-button">1</button></div>
-        <div><button class="op-button">2</button></div>
-        <div><button class="op-button">3</button></div>
-        <div><button class="op-button">-</button></div>
+        <div><button id="1" class="op-button">1</button></div>
+        <div><button id="2" class="op-button">2</button></div>
+        <div><button id="3" class="op-button">3</button></div>
+        <div><button id="minus" class="op-button">-</button></div>
       </div>
 
       <div class="fourth-row">
-        <div><button class="op-button">.</button></div>
-        <div><button class="op-button">0</button></div>
-        <div><button class="op-button">=</button></div>
-        <div><button class="op-button">+</button></div>
+        <div><button id="decimal" class="op-button">.</button></div>
+        <div><button id="0" class="op-button">0</button></div>
+        <div><button id="equal" class="op-button">=</button></div>
+        <div><button id="plus" class="op-button">+</button></div>
       </div>
     </div>
   </main>
