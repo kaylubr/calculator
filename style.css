@@ -34,11 +34,24 @@ main {
   background-color: white;
 }
 
+.left-section {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.5rem;
+}
+
 #displayed-value {
   font-size: 38px;
   font-family: 'Times New Roman';
   margin-right: 8px;
+  align-self: flex-end;
 }
+
+#calc-history {
+  align-self: flex-end;
+  margin-right: 10px;
+}
+
 
 .operation-buttons {
   display: flex;
