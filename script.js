@@ -2,6 +2,8 @@ let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let operatorClicked = false;
+let equalIsClicked = false;
+let timesEqualClicked = 0;
 const displayContainer = document.querySelector('.left-section');
 const displayedValue = document.querySelector('#displayed-value');
 const calcBtns = document.querySelector('.operation-buttons');
@@ -9,7 +11,234 @@ const calcHistory = document.createElement('div');
 calcHistory.setAttribute('id', 'calc-history');
 let calcHistoryExists = false;
 
-calcBtns.addEventListener('click', (e) => {
+calcBtns.addEventListener('click', clickFunction);
+document.addEventListener('keydown', keyboardFunction);
+
+function add(firstNumber, secondNumber) {
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber + secondNumber).toFixed(1);
+  } else {
+    return firstNumber + secondNumber;
+  }
+}
+
+function subtract(firstNumber, secondNumber) {
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber - secondNumber).toFixed(1);
+  } else {
+    return firstNumber - secondNumber;
+  }
+}
+
+function multiply(firstNumber, secondNumber) {
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber * secondNumber).toFixed(1);
+  } else {
+    return firstNumber * secondNumber;
+  }
+}
+
+function divide(firstNumber, secondNumber) {
+  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
+    return (firstNumber / secondNumber).toFixed(1);
+  } else {
+    return firstNumber / secondNumber;
+  }
+}
+
+function operate(firstNumber, secondNumber, operator) {
+  switch(operator) {
+    case '+':
+      displayedValue.textContent = add(firstNumber, secondNumber); 
+      if (displayedValue.textContent.length > 17) {
+        displayedValue.textContent = parseFloat(displayedValue.textContent).toExponential(2);
+      }
+      break;
+    case '-':
+      displayedValue.textContent = subtract(firstNumber, secondNumber);
+      if (displayedValue.textContent.length > 17) {
+        displayedValue.textContent = parseFloat(displayedValue.textContent).toExponential(2);
+      }
+      break;
+    case 'x':
+      displayedValue.textContent = multiply(firstNumber, secondNumber);
+      if (displayedValue.textContent.length > 17) {
+        displayedValue.textContent = parseFloat(displayedValue.textContent).toExponential(2);
+      }
+      break;
+    case '/':
+      if (secondNumber == 0) {
+        displayedValue.textContent = "Cannot be divided to zero!";
+        displayedValue.style.fontSize = '25px';
+        break;
+      }
+
+      displayedValue.textContent = divide(firstNumber, secondNumber);
+      if (displayedValue.textContent.length > 17) {
+        displayedValue.textContent = parseFloat(displayedValue.textContent).toExponential(2);
+      }
+      break;
+  }
+}
+
+function clearData() {
+  displayedValue.style.fontSize = '38px';
+  if (firstNumber == 0 && 
+      secondNumber == 0 && 
+      displayedValue.textContent === '0' &&
+      operator === null) {
+        return;
+      }
+
+  firstNumber = 0;
+  secondNumber = 0;
+  displayedValue.textContent = '0';
+  operator = null;
+
+  removeCalcHistory();
+}
+
+function clicked(input) {
+  //Handling decimal points
+  if (input === '.'){
+    let displayChecker = Array.from(displayedValue.textContent);
+
+    if (displayChecker.includes('.')) {
+      return;
+    }
+
+    displayedValue.textContent += input;
+    return;
+  }
+
+  displayedValue.style.fontSize = '38px';
+  if (displayedValue.textContent === '0') {
+    displayedValue.textContent = input;
+    return;
+  }
+
+  if (operatorClicked === true) {
+    displayedValue.textContent = "";
+    displayedValue.textContent += input;
+    operatorClicked = false;
+    return;
+  }
+
+  if (equalIsClicked === true) {
+    displayedValue.textContent = "";
+    displayedValue.textContent += input;
+    removeCalcHistory()
+    equalIsClicked = false;
+    return;
+  }
+
+  if (displayedValue.textContent.length === 14) {
+    return;
+  }
+  
+  displayedValue.textContent += input;
+}
+
+function deleteInput() {
+  displayedValue.style.fontSize = '38px';
+  if (operatorClicked === true) {
+    return;
+  }
+
+  if (displayedValue.textContent.length === 1) {
+    removeCalcHistory();
+    displayedValue.textContent = '0';
+    calcHistoryExists = false;
+    return;
+  }
+
+  if (displayedValue.textContent === 'Cannot be divided to zero!') {
+    clearData();
+    return;
+  }
+
+  let str = displayedValue.textContent.split("");
+  str.pop();
+  displayedValue.textContent = str.join("");
+}
+
+function handleOperation(operator) {
+  equalIsClicked = false;
+  timesEqualClicked = 0;
+  if (firstNumber !== null && secondNumber === null) {
+    equal();
+  }
+
+  operatorClicked = true;
+
+  if (containDecimal(displayedValue.textContent)) {
+    firstNumber = parseFloat(displayedValue.textContent);
+  } 
+  else {
+    firstNumber = parseInt(displayedValue.textContent);
+  }
+  
+  calcHistory.textContent = `${firstNumber} ${operator}`;
+  
+  calcHistoryExists = true;
+  displayContainer.append(calcHistory);
+}
+
+function equal() {
+  if (firstNumber !== null || secondNumber !== null) {
+    timesEqualClicked++;
+    if (containDecimal(displayedValue.textContent) && timesEqualClicked <= 1) {
+      secondNumber = parseFloat(displayedValue.textContent);
+    } 
+    else if (!(containDecimal(displayedValue.textContent)) &&timesEqualClicked <= 1) {
+      secondNumber = parseInt(displayedValue.textContent);
+    }
+    
+    operate(firstNumber, secondNumber, operator); 
+    if (displayedValue.textContent.length > 14) {
+      displayedValue.style.fontSize = "27px";
+    }
+    
+    calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
+    firstNumber = parseFloat(displayedValue.textContent); 
+
+    if (timesEqualClicked > 1 && operatorClicked === false) {
+      calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
+    }
+
+    equalIsClicked = true
+  }
+}
+
+function isDisplayAnError() {
+  if (displayedValue.textContent === 'Cannot be divided to zero!') {
+    clearData();
+  }
+}
+
+function removeCalcHistory() {
+  if (calcHistoryExists === true)  {
+    displayContainer.removeChild(calcHistory);
+    calcHistoryExists = false;
+  }
+}
+
+function containDecimal(input) {
+  let checker = Array.from(input.toString());
+  if (checker.includes('.')) {
+    return true;
+  } 
+
+  return false;
+}
+
+//Keyboard sound effect
+function playType() {
+  let audio = document.getElementById('audio');
+  audio.play();
+}
+
+function clickFunction(e) {
   e.preventDefault();
   isDisplayAnError();
   switch(e.target.id) {
@@ -90,9 +319,9 @@ calcBtns.addEventListener('click', (e) => {
       playType();
       break;
   }
-});
+}
 
-document.addEventListener('keydown', (e) => {
+function keyboardFunction(e) {
   isDisplayAnError();
   switch(e.key) {
     case 'Escape':
@@ -172,196 +401,4 @@ document.addEventListener('keydown', (e) => {
       playType();
       break;
   }
-});
-
-function add(firstNumber, secondNumber) {
-  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
-    return (firstNumber + secondNumber).toFixed(1);
-  } else {
-    return firstNumber + secondNumber;
-  }
-}
-
-function subtract(firstNumber, secondNumber) {
-  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
-    return (firstNumber - secondNumber).toFixed(1);
-  } else {
-    return firstNumber - secondNumber;
-  }
-}
-
-function multiply(firstNumber, secondNumber) {
-  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
-    return (firstNumber * secondNumber).toFixed(1);
-  } else {
-    return firstNumber * secondNumber;
-  }
-}
-
-function divide(firstNumber, secondNumber) {
-  if (containDecimal(firstNumber) || containDecimal(secondNumber)) {
-    return (firstNumber / secondNumber).toFixed(1);
-  } else {
-    return firstNumber / secondNumber;
-  }
-}
-
-function operate(firstNumber, secondNumber, operator) {
-  switch(operator) {
-    case '+':
-      displayedValue.textContent = add(firstNumber, secondNumber); 
-      break;
-    case '-':
-      displayedValue.textContent = subtract(firstNumber, secondNumber);
-      break;
-    case 'x':
-      displayedValue.textContent = multiply(firstNumber, secondNumber);
-      break;
-    case '/':
-      if (secondNumber == 0) {
-        displayedValue.textContent = "Cannot be divided to zero!";
-        displayedValue.style.fontSize = '25px';
-        break;
-      }
-
-      displayedValue.textContent = divide(firstNumber, secondNumber);
-      break;
-  }
-}
-
-function clearData() {
-  displayedValue.style.fontSize = '38px';
-  if (firstNumber == 0 && 
-      secondNumber == 0 && 
-      displayedValue.textContent === '0' &&
-      operator === null) {
-        return;
-      }
-
-  firstNumber = 0;
-  secondNumber = 0;
-  displayedValue.textContent = '0';
-  operator = null;
-
-  if (calcHistoryExists === true)  {
-    displayContainer.removeChild(calcHistory);
-    calcHistoryExists = false;
-  }
-}
-
-function clicked(input) {
-  if (input === '.'){
-    let displayChecker = Array.from(displayedValue.textContent);
-
-    if (displayChecker.includes('.')) {
-      return;
-    }
-
-    displayedValue.textContent += input;
-    return;
-  }
-
-  displayedValue.style.fontSize = '38px';
-  if (displayedValue.textContent === '0') {
-    displayedValue.textContent = input;
-    return;
-  }
-
-  if (operatorClicked === true) {
-    displayedValue.textContent = "";
-    displayedValue.textContent += input;
-    operatorClicked = false;
-    return;
-  }
-
-  if (displayedValue.textContent.length === 14) {
-    return;
-  }
-  
-  displayedValue.textContent += input;
-}
-
-function deleteInput() {
-  displayedValue.style.fontSize = '38px';
-  if (operatorClicked === true) {
-    return;
-  }
-
-  if (displayedValue.textContent.length === 1) {
-    if (calcHistoryExists === true)  {
-      displayContainer.removeChild(calcHistory);
-      calcHistoryExists = false;
-    }
-    displayedValue.textContent = '0';
-    calcHistoryExists = false;
-    return;
-  }
-
-  if (displayedValue.textContent === 'Cannot be divided to zero!') {
-    clearData();
-    return;
-  }
-
-  let str = displayedValue.textContent.split("");
-  str.pop();
-  displayedValue.textContent = str.join("");
-}
-
-function handleOperation(operator) {
-  if (firstNumber !== null && secondNumber === null) {
-    equal();
-  }
-
-  operatorClicked = true;
-
-  if (containDecimal(displayedValue.textContent)) {
-    firstNumber = parseFloat(displayedValue.textContent);
-  } 
-  else {
-    firstNumber = parseInt(displayedValue.textContent);
-  }
-  
-  calcHistory.textContent = `${firstNumber} ${operator}`;
-  calcHistoryExists = true;
-  displayContainer.append(calcHistory);
-}
-
-function equal() {
-  if (firstNumber !== null || secondNumber !== null) {
-    if (containDecimal(displayedValue.textContent)) {
-      secondNumber = parseFloat(displayedValue.textContent);
-    } 
-    else {
-      secondNumber = parseInt(displayedValue.textContent);
-    }
-    
-    operate(firstNumber, secondNumber, operator);
-    if (displayedValue.textContent.length > 14) {
-      displayedValue.style.fontSize = "22px";
-    }
-    
-    calcHistory.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
-    equalClicked = true;
-  }
-}
-
-function isDisplayAnError() {
-  if (displayedValue.textContent === 'Cannot be divided to zero!') {
-    clearData();
-  }
-}
-
-function containDecimal(input) {
-  let checker = Array.from(input.toString());
-  if (checker.includes('.')) {
-    return true;
-  } 
-
-  return false;
-}
-
-//Keyboard sound effect
-function playType() {
-  let audio = document.getElementById('audio');
-  audio.play();
 }
