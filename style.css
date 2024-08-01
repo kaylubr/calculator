@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #B85042;
+  background-color: #124E66;
 }
 
 /* The main container/calculator */
@@ -18,7 +18,7 @@ main {
   padding: 20px 0px;
   gap: 1rem;
   border-radius:12px;
-  background-color: #E7E8D1;
+  background-color: #748D92;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -71,7 +71,7 @@ main {
 #delete {
   width: 141px;  
   height: 50px;
-  background-color: #A7BEAE;
+  background-color: #D3D9D4;
   border-radius: 8px;
   font-family: "Lucida Console", "Courier New", monospace;
   font-weight: 500;
@@ -81,14 +81,14 @@ main {
 #clear:hover, 
 #delete:hover,
 .op-button:hover {
-  background-color: #7d9083;
+  background-color: #2E3944;
   transform: scale(0.9);
 }
 
 .op-button {
   width: 70px;
   height: 60px;
-  background-color: #A7BEAE;
+  background-color: #D3D9D4;
   border-radius: 8px;
   font-family: "Lucida Console", "Courier New", monospace;
   font-weight: 500;
