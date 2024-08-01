@@ -68,8 +68,7 @@ function operate(firstNumber, secondNumber, operator) {
       break;
     case '/':
       if (secondNumber == 0) {
-        displayedValue.textContent = "Cannot be divided to zero!";
-        displayedValue.style.fontSize = '25px';
+        displayedValue.textContent = "Cannot divide to zero";
         break;
       }
 
