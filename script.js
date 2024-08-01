@@ -232,12 +232,6 @@ function containDecimal(input) {
   return false;
 }
 
-//Keyboard sound effect
-function playType() {
-  let audio = document.getElementById('audio');
-  audio.play();
-}
-
 function clickFunction(e) {
   e.preventDefault();
   isDisplayAnError();
