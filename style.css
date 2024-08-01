@@ -1,6 +1,7 @@
 body {
   margin: 0px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -20,6 +21,23 @@ main {
   border-radius:12px;
   background-color: #748D92;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+footer {
+  margin-top: 100px;
+  font-size: 23px;
+  font-family:Garamond, serif;
+  font-weight: bolder;
+  color: #D3D9D4;
+}
+
+footer > a {
+  text-decoration: none;
+  color: #D3D9D4;
+}
+
+footer > a:hover {
+  color: #748D92;
 }
 
 /* Two containers inside main*/
