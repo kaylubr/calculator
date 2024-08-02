@@ -3,13 +3,16 @@ let secondNumber = null;
 let operator = null;
 let operatorClicked = false;
 let equalIsClicked = false;
+let calcHistoryExists = false;
 let timesEqualClicked = 0;
+
 const displayContainer = document.querySelector('.display-container');
 const displayedValue = document.querySelector('#displayed-value');
 const calcBtns = document.querySelector('.operation-buttons');
 const calcHistory = document.createElement('div');
+
 calcHistory.setAttribute('id', 'calc-history');
-let calcHistoryExists = false;
+
 
 calcBtns.addEventListener('click', clickFunction);
 document.addEventListener('keydown', keyboardFunction);
@@ -189,7 +192,7 @@ function equal() {
     if (containDecimal(displayedValue.textContent) && timesEqualClicked <= 1) {
       secondNumber = parseFloat(displayedValue.textContent);
     } 
-    else if (!(containDecimal(displayedValue.textContent)) &&timesEqualClicked <= 1) {
+    else if (!(containDecimal(displayedValue.textContent)) && timesEqualClicked <= 1) {
       secondNumber = parseInt(displayedValue.textContent);
     }
     
